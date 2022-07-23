@@ -12,5 +12,3 @@ php artisan serve
 
 URL for documentation : https://documenter.getpostman.com/view/15761353/UzXKWeNP
 
-from local
-from server
