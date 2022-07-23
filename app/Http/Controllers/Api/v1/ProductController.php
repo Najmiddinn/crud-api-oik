@@ -16,9 +16,6 @@ class ProductController extends Controller
     * Display a listing of the resource.
     *
     * @return \Illuminate\Http\Response
-    * $models = Product::with(!empty($request->get('include')) ? explode(',', $request->get('include')) : [])->get();
-    * $models->append(!empty($request->append) ? explode(',', $request->get('append')) : []);
-    * Item::withTrashed()->get();Item::onlyTrashed()->get();
     */
 
     public function index()

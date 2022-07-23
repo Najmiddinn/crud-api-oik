@@ -22,12 +22,7 @@ class Product extends Model
    
 
     protected $with = ['category'];
-    // protected $appends = [];
-    // public function getAppendFuncAttribute()
-    // {
-    //     return 'appendFunc';
-    // }
-    
+   
     public function category():HasOne
     {
         return $this->hasOne(Category::class,'id','category_id');
