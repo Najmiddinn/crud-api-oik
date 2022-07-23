@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -23,10 +24,9 @@ class Product extends Model
 
     protected $with = ['category'];
    
-    public function category():HasOne
+    public function category():BelongsTo
     {
-        return $this->hasOne(Category::class,'id','category_id');
+        return $this->BelongsTo(Category::class);
     }
-
 
 }
