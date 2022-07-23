@@ -270,6 +270,7 @@ INTRO
     'example_languages' => [
         'bash',
         'javascript',
+        'python'
     ],
 
     /*
@@ -360,7 +361,7 @@ INTRO
             Strategies\Responses\UseApiResourceTags::class,
             Strategies\Responses\UseResponseTag::class,
             Strategies\Responses\UseResponseFileTag::class,
-            Strategies\Responses\ResponseCalls::class,
+            // Strategies\Responses\ResponseCalls::class,
         ],
         'responseFields' => [
             Strategies\ResponseFields\GetFromResponseFieldTag::class,

@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::post('/create', [UserController::class, 'create'])->name('create');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth:api');
 

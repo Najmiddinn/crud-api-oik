@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $models = Category::where('status',1)->get();
+        $models = Category::where('status',1)->paginate(25);
         return CategoryResource::collection($models);
     }
 
@@ -36,9 +37,9 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $model = Category::create($request->validate());
+        $model = Category::create($request->validated());
         return new CategoryResource($model);
     }
 
@@ -72,10 +73,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         $model = Category::findOrFail($id);
-        $model->update($request->validate());
+        $model->update($request->validated());
         return new CategoryResource($model);
     }
 

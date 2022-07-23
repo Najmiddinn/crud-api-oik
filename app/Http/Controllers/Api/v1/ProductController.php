@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $models = Product::where('status',1)->get();
+        $models = Product::where('status',1)->paginate(25);
         return ProductResource::collection($models);
     }
 
@@ -42,11 +43,11 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         
+        $request->validated();
         // $model = Product::create($request->validate());
-        $request->validate();
         $file = $request->file('img');
         $filenamehash = md5(time()). '.' . $file->getClientOriginalExtension();
 
@@ -82,7 +83,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(ProductRequest $product)
     {
         //
     }
@@ -94,17 +95,18 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         $model = Product::findOrFail($id);
-        // $request->validate();      
+         
+        $request->validated();   
         // $model->update($request->validate());
-    
+        
         $old_img = $model->img;
         File::delete(public_path('uploads/product/'.$model->id.'/'.$old_img));
 
         $file = $request->file('img');
-        dd($request->name);
+       
         $filenamehash = md5(time()). '.' . $file->getClientOriginalExtension();
         
         $model->name = $request->name;
